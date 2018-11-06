@@ -1,0 +1,5 @@
+<div class="content">
+  <ng-container *ngFor="let item of model; let i = index;">
+    <div [appDragSort]="i" [(mainModel)]="model" class="item" (click)="selectItem(i)" [ngStyle]="{'background': item.color}">{{item?.value}}</div>
+  </ng-container>
+</div>

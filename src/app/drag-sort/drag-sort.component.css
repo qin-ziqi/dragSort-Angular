@@ -1,0 +1,17 @@
+.content {
+  width: 512px;
+  margin: 50px auto;
+  border: 2px solid #ccc;
+}
+
+.item {
+  margin: 5px;
+  width: 500px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  user-select: none;
+}
