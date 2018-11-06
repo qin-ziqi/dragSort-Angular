@@ -14,3 +14,8 @@ npm install
 
 ng serve 
 ```
+
+## show
+
+## problem
+暂时只支持和相邻的元素互换位置
