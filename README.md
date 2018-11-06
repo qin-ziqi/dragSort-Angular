@@ -10,7 +10,7 @@ dragSort, Angular, drective
 
 ## you can run it
 ```
-git clone https://github.com/qin-ziqi/dragSort-Angular
+git clone https://github.com/qin-ziqi/dragSort-Angular.git
 
 cd dragSort-Angular
 
