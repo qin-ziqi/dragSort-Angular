@@ -1,7 +1,7 @@
-# description
+## description
 基于Angular-directive的拖拽排序实现
 
-# key words
+## key words
 dragSort, Angular, drective
 
 ## you can run it
