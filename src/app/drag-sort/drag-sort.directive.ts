@@ -14,6 +14,8 @@ export class DragSortDirective {
   // tslint:disable-next-line:no-inferrable-types
   _movementY: number = 0;
 
+  _offsetTopArray: Array<any> = [];
+
   /**
    * @desc 监听鼠标点击事件
    */
@@ -46,20 +48,7 @@ export class DragSortDirective {
           offsetTopArray.push(childNodeList[key].offsetTop);
         }
       }
-
-      // model重组
-      const top = this.el.nativeElement.offsetTop;
-      const array = offsetTopArray;
-      const index = this._index;
-      if (top > array[index + 1]) {
-        const item = this._model.slice(index, index + 1);
-        this._model.splice(index, 1);
-        this._model.splice(index + 1, 0, item[0]);
-      } else if (top < array[index - 1]) {
-        const item = this._model.slice(index, index + 1);
-        this._model.splice(index, 1);
-        this._model.splice(index - 1, 0, item[0]);
-      }
+      this._offsetTopArray = offsetTopArray;
     }
   }
 
@@ -67,19 +56,65 @@ export class DragSortDirective {
    * @desc 监听鼠标松开事件
    */
   @HostListener('mouseup', ['$event']) onMouseup(event) {
-    this._bool = false;
-    this.clearStyle();
+    this.setModel();
   }
 
   /**
    * @desc 监听鼠标离开事件
    */
   @HostListener('mouseleave', ['$event']) onmouseleave(event) {
-    this._bool = false;
-    this.clearStyle();
+    this.setModel();
   }
 
+  /**
+   * @desc model重组
+   */
+  setModel() {
+    if (this._bool) {
+      // model重组
+      const top = this.el.nativeElement.offsetTop;
+      const arr = this._offsetTopArray;
+      const index = this._index;
+
+      if (this._movementY > 0) {
+        for (let i = index; i < arr.length; i++) {
+          if (top > arr[i] && top < arr[i + 1]) {
+            const item = this._model.slice(index, index + 1);
+            this._model.splice(index, 1);
+            this._model.splice(i, 0, item[0]);
+            break;
+          } else if (top > arr[arr.length - 1]) {
+            const item = this._model[index];
+            this._model.splice(index, 1);
+            this._model.push(item);
+            break;
+          }
+        }
+      } else if (this._movementY < 0) {
+        for (let i = index; i >= 0; i--) {
+          if (top < arr[i] && top > arr[i - 1]) {
+            const item = this._model.slice(index, index + 1);
+            this._model.splice(index, 1);
+            this._model.splice(i, 0, item[0]);
+            break;
+          } else if (top < arr[0]) {
+            const item = this._model[index];
+            this._model.splice(index, 1);
+            this._model.unshift(item);
+            break;
+          }
+        }
+      }
+      this.clearStyle();
+    }
+  }
+
+  /**
+   * @desc 清除样式
+   */
   clearStyle() {
+    this._bool = false;
+
     const selectElement = this.el.nativeElement;
     if (selectElement) {
       this.render.setStyle(selectElement, 'top', '0px');
