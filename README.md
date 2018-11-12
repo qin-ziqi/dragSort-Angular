@@ -20,7 +20,7 @@ ng serve
 ```
 
 ## show
-![image](https://github.com/qin-ziqi/dragSort-Angular/blob/master/src/assets/drag.gif)
+![image](https://github.com/qin-ziqi/dragSort-Angular/blob/master/src/assets/dragX.gif)
 
 ## problem
 ```
