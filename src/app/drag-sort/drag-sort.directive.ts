@@ -71,33 +71,32 @@ export class DragSortDirective {
    */
   setModel() {
     if (this._bool) {
-      // model重组
       const top = this.el.nativeElement.offsetTop;
       const arr = this._offsetTopArray;
       const index = this._index;
 
-      if (this._movementY > 0) {
-        for (let i = index; i < arr.length; i++) {
+      if (this._movementY > 0) { // 向下移动
+        for (let i = index; i < arr.length; i++) { // 非最后一个元素之后
           if (top > arr[i] && top < arr[i + 1]) {
             const item = this._model.slice(index, index + 1);
             this._model.splice(index, 1);
             this._model.splice(i, 0, item[0]);
             break;
-          } else if (top > arr[arr.length - 1]) {
+          } else if (top > arr[arr.length - 1]) { // 最后一个元素之后
             const item = this._model[index];
             this._model.splice(index, 1);
             this._model.push(item);
             break;
           }
         }
-      } else if (this._movementY < 0) {
+      } else if (this._movementY < 0) { // 向上移动
         for (let i = index; i >= 0; i--) {
-          if (top < arr[i] && top > arr[i - 1]) {
+          if (top < arr[i] && top > arr[i - 1]) { // 非第一个元素之前
             const item = this._model.slice(index, index + 1);
             this._model.splice(index, 1);
             this._model.splice(i, 0, item[0]);
             break;
-          } else if (top < arr[0]) {
+          } else if (top < arr[0]) {  // 第一个元素之前
             const item = this._model[index];
             this._model.splice(index, 1);
             this._model.unshift(item);
