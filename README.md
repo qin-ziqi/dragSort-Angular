@@ -13,7 +13,7 @@ dragSort, Angular, drective
 ## dependency
 
 ```
-node@8.11.1, @angular/cli@6.1.5
+node@14.17.6, @angular/cli@6.1.5
 ```
 
 ## you can run it
@@ -22,6 +22,8 @@ node@8.11.1, @angular/cli@6.1.5
 git clone https://github.com/qin-ziqi/dragSort-Angular.git
 
 cd dragSort-Angular
+
+npm i @angular/cli@6.1.5 -g
 
 npm install
 
